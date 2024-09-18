@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentLoginBinding
+import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 
 class ShoeDetailFragment : Fragment() {
 
@@ -15,7 +16,7 @@ class ShoeDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentLoginBinding = DataBindingUtil.inflate(inflater,
+        val binding: FragmentShoeDetailBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_shoe_detail, container, false)
 
         return binding.root

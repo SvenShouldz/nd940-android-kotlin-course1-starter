@@ -1,29 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/shoe_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/label_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_double"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:labelFor="@+id/edit_name"
+                android:text="@string/label_name" />
+
             <EditText
-                android:id="@+id/edit_mail"
+                android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:autofillHints="emailAddress"
+                android:autofillHints=""
+                android:paddingStart="@dimen/padding_double"
                 android:background="@drawable/rounded_shape"
                 android:ems="10"
-                android:hint="@string/edit_mail_hint"
-                android:inputType="textEmailAddress"
+                android:hint="@string/detail_name"
+                android:inputType="text"
                 android:padding="@dimen/default_padding" />
+
+            <TextView
+                android:id="@+id/label_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_double"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:labelFor="@+id/edit_company"
+                android:text="@string/label_company" />
+
+            <EditText
+                android:id="@+id/edit_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:paddingStart="@dimen/padding_double"
+                android:autofillHints=""
+                android:background="@drawable/rounded_shape"
+                android:ems="10"
+                android:hint="@string/detail_company"
+                android:inputType="text"
+                android:padding="@dimen/default_padding" />
+
+            <TextView
+                android:id="@+id/label_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_double"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:labelFor="@+id/edit_size"
+                android:text="@string/label_size" />
+
+            <EditText
+                android:id="@+id/edit_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:autofillHints=""
+                android:background="@drawable/rounded_shape"
+                android:paddingStart="@dimen/padding_double"
+                android:ems="10"
+                android:hint="@string/detail_size"
+                android:inputType="numberSigned"
+                android:padding="@dimen/default_padding" />
+
+            <TextView
+                android:id="@+id/label_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_double"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginBottom="@dimen/default_padding"
+                android:labelFor="@+id/edit_description"
+                android:text="@string/label_description" />
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:autofillHints=""
+                android:background="@drawable/rounded_shape"
+                android:paddingStart="@dimen/padding_double"
+                android:ems="10"
+                android:hint="@string/detail_description"
+                android:inputType="text"
+                android:padding="@dimen/default_padding" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/default_margin"
+            android:paddingStart="@dimen/padding_double"
+            android:paddingEnd="@dimen/padding_double"
+            android:background="@drawable/rounded_shape"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/cancel_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@+id/shoe_detail"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <Button
+            android:id="@+id/save_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:paddingStart="@dimen/padding_double"
+            android:paddingEnd="@dimen/padding_double"
+            android:background="@drawable/rounded_shape"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/save_button"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@+id/shoe_detail"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,4 +13,15 @@
     <string name="logo_description">Droid bot head sticking out of a shoe (Droid boot Logo)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_button">Add a new Shoe</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="detail_description">Description of your Shoe</string>
+    <string name="detail_size">Shoe Size</string>
+    <string name="detail_company">Company Name</string>
+    <string name="detail_name">Shoe Name</string>
+    <string name="label_name">Name</string>
+    <string name="label_company">Company</string>
+    <string name="label_size">Size</string>
+    <string name="label_description">Description</string>
 </resources>

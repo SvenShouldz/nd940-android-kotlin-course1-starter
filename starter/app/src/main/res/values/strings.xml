@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">ShoeStore</string>
+    <string name="login_button">Login</string>
+    <string name="signup_button">Sign Up</string>
+    <string name="edit_mail_hint">E-Mail-Address</string>
+    <string name="edit_password_hint">Password</string>
+    <string name="welcome_button">Boot me up</string>
+    <string name="welcome_sub_text">Step into the future</string>
+    <string name="welcome_text">Welcome to Droid Boot</string>
+    <string name="instruction_text">How it works:</string>
+    <string name="instruction_sub_text">pick a shoe, and buy it!</string>
+    <string name="instruction_button">i trust shoe</string>
+    <string name="logo_description">Droid bot head sticking out of a shoe (Droid boot Logo)</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +23,7 @@ import com.udacity.shoestore.models.ShoeListViewModel
 
 class ShoeListFragment : Fragment() {
 
-    private lateinit var viewModel: ShoeListViewModel
+    private val viewModel: ShoeListViewModel by activityViewModels()
     private lateinit var linearLayout: LinearLayout
 
     override fun onCreateView(
@@ -33,9 +35,9 @@ class ShoeListFragment : Fragment() {
             R.layout.fragment_shoe_list, container, false
         )
 
-        linearLayout = binding.shoeList
+        (activity as AppCompatActivity).supportActionBar?.show()
 
-        viewModel = ViewModelProvider(requireActivity())[ShoeListViewModel::class.java]
+        linearLayout = binding.shoeList
 
         setupShoeList(viewModel.shoeList)
 

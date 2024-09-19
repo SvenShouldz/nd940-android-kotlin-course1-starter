@@ -2,6 +2,7 @@ package com.udacity.shoestore
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         )
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(this, navController, appBarConfiguration)
+
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
     }
 

@@ -1,15 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/rounded_shape"
+        android:layout_margin="@dimen/default_padding"
+        android:padding="@dimen/padding_double">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shoe_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{shoe.name}"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/shoe_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{shoe.company}"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
         <TextView
+            android:id="@+id/shoe_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="shoe"/>
+            android:layout_weight="1"
+            android:text='@{"Size: " + shoe.size}'
+            android:layout_gravity="center_vertical"
+            android:textAlignment="textEnd"
+            android:textSize="16sp" />
 
     </LinearLayout>
+
 
 </layout>

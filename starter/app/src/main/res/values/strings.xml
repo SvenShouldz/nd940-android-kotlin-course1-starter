@@ -34,4 +34,6 @@
     <string name="instruction_title_3">3. View Details</string>
     <string name="instruction_3">Click on a shoe to see more information about it.</string>
     <string name="your_shoes">Your Shoes</string>
+    <string name="empty_field">Please fill in all fields</string>
+    <string name="invalid_size">Please enter a valid size</string>
 </resources>

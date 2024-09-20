@@ -34,33 +34,40 @@ class ShoeDetailFragment : Fragment() {
             R.layout.fragment_shoe_detail, container, false
         )
 
+        // get Safe Args & add to bindings
         val args: ShoeDetailFragmentArgs by navArgs()
         setupNavArguments(args, binding)
 
+        // set ActionBar Title & Icon
         val savedShoe: Shoe? = args.shoe
         setupAppBarConfig(savedShoe)
 
         viewModel = ViewModelProvider(requireActivity())[ShoeListViewModel::class.java]
 
+        // save Shoe to ViewModel
+        // TODO error while saving edited shoe
         binding.saveButton.setOnClickListener { view ->
             val name = binding.editName.text.toString()
             val company = binding.editCompany.text.toString()
             val sizeString = binding.editSize.text.toString()
             val description = binding.editDescription.text.toString()
 
+            // check if textEdits are empty
             if (name.isEmpty() || company.isEmpty() || sizeString.isEmpty() || description.isEmpty()) {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), getString(R.string.empty_field), Toast.LENGTH_SHORT)
                     .show()
             }
 
-            val size: Double = if (sizeString.toInt() >= 50) {
-                Toast.makeText(requireContext(), "Please enter a valid size", Toast.LENGTH_SHORT)
+            // check if size is bigger than 60
+            val size: Double = if (sizeString.toInt() >= 60) {
+                Toast.makeText(requireContext(), getString(R.string.invalid_size), Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             } else {
                 sizeString.toDouble()
             }
 
+            // create new Shoe Object
             val newShoe = Shoe(
                 name = name,
                 company = company,
@@ -68,6 +75,7 @@ class ShoeDetailFragment : Fragment() {
                 description = description
             )
 
+            // add new Shoe and navigate back
             viewModel.add(newShoe)
             view.findNavController().navigateUp()
         }
@@ -80,14 +88,15 @@ class ShoeDetailFragment : Fragment() {
         return binding.root
     }
 
+    //TODO delete Button is not shown yet
     private fun setupAppBarConfig(savedShoe: Shoe?) {
-
+        // init new menuProvider
         val menuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menu.clear() // Clear old menu items
                 menuInflater.inflate(R.menu.menu_shoe_list, menu)
             }
-
+            // delete shoe and navigate back
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.action_delete_shoe -> {
@@ -104,6 +113,7 @@ class ShoeDetailFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.show()
 
+        // change title when open existing shoeDetail
         if (savedShoe != null) {
             (activity as AppCompatActivity).supportActionBar?.title =
                 "${savedShoe.company} - ${savedShoe.name}"
@@ -115,6 +125,7 @@ class ShoeDetailFragment : Fragment() {
         }
     }
 
+    // add navArgs to binding
     private fun setupNavArguments(
         args: ShoeDetailFragmentArgs,
         binding: FragmentShoeDetailBinding

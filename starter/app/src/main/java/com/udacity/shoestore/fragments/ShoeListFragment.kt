@@ -36,6 +36,7 @@ class ShoeListFragment : Fragment() {
             R.layout.fragment_shoe_list, container, false
         )
 
+        // Set Logout Button
         val menuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menu.clear() // Clear old menu items
@@ -55,14 +56,17 @@ class ShoeListFragment : Fragment() {
             }
         }
 
+        // Set Actionbar
         (activity as AppCompatActivity).supportActionBar?.show()
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.your_shoes)
         (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
 
         linearLayout = binding.shoeList
 
+        // add shoes to linearLayout
         setupShoeList(viewModel.shoeList)
 
+        // navigate to shoeDetailFragment to add new shoe (null)
         binding.addShoeButton.setOnClickListener { view ->
             view.findNavController()
                 .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment(null))

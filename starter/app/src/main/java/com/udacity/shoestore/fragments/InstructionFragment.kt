@@ -10,21 +10,25 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentInstructionBinding
-import com.udacity.shoestore.databinding.FragmentLoginBinding
 
-class InstructionFragment: Fragment() {
+class InstructionFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentInstructionBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_instruction, container, false)
+        val binding: FragmentInstructionBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_instruction, container, false
+        )
 
-        (activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).supportActionBar?.show()
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.instruction_title)
 
-        binding.instructionButton.setOnClickListener{ view ->
-            view.findNavController().navigate(InstructionFragmentDirections.actionInstructionFragmentToShoeListFragment())
+        binding.instructionButton.setOnClickListener { view ->
+            view.findNavController()
+                .navigate(InstructionFragmentDirections.actionInstructionFragmentToShoeListFragment())
         }
 
         return binding.root

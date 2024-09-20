@@ -10,29 +10,69 @@
         <LinearLayout
             android:id="@+id/instruction_text_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:padding="@dimen/padding_double"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/instruction_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:letterSpacing="0.02"
-                android:text="@string/instruction_text"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.02"
+                    android:text="@string/instruction_title_1"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:padding="@dimen/default_padding"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/instruction_sub_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/instruction_sub_text"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instruction_1"
+                    android:paddingStart="@dimen/padding_double"
+                    android:paddingEnd="@dimen/padding_double"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.02"
+                    android:text="@string/instruction_title_2"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:padding="@dimen/default_padding"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instruction_2"
+                    android:paddingStart="@dimen/padding_double"
+                    android:paddingEnd="@dimen/padding_double"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.02"
+                    android:text="@string/instruction_title_3"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:padding="@dimen/default_padding"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instruction_3"
+                    android:paddingStart="@dimen/padding_double"
+                    android:paddingEnd="@dimen/padding_double"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -45,13 +85,13 @@
             android:background="@drawable/rounded_shape"
             android:backgroundTint="@color/colorAccent"
             android:padding="@dimen/default_padding"
+            android:layout_marginBottom="@dimen/margin_double"
             android:text="@string/instruction_button"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/instruction_text_container"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/instruction_text_container" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

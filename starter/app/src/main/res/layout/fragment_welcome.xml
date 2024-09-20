@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/logo_description"
                 android:src="@drawable/droidboot"
-                app:tint="@color/colorPrimaryDark" />
+                app:tint="@color/colorPrimaryLight" />
 
             <TextView
                 android:id="@+id/welcome_text"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/welcome_sub_text"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -51,13 +51,13 @@
             android:background="@drawable/rounded_shape"
             android:backgroundTint="@color/colorAccent"
             android:padding="@dimen/default_padding"
+            android:layout_marginBottom="@dimen/margin_double"
             android:text="@string/welcome_button"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_text_container" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

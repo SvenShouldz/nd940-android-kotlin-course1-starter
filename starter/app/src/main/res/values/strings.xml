@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">ShoeStore</string>
+    <string name="app_name">DroidBoot</string>
+    <string name="app_name_droid">Droid</string>
+    <string name="app_name_boot">Boot</string>
     <string name="login_button">Login</string>
     <string name="signup_button">Sign Up</string>
     <string name="edit_mail_hint">E-Mail-Address</string>
@@ -7,12 +9,10 @@
     <string name="welcome_button">Boot me up</string>
     <string name="welcome_sub_text">Step into the future</string>
     <string name="welcome_text">Welcome to Droid Boot</string>
-    <string name="instruction_text">How it works:</string>
-    <string name="instruction_sub_text">pick a shoe, and buy it!</string>
-    <string name="instruction_button">i trust shoe</string>
+    <string name="instruction_title">How it works</string>
+    <string name="instruction_sub_text">First, add your shoes to the list by using the + Button. Edit existing shoes by clicking on the item.</string>
+    <string name="instruction_button">Ok, Let\'s Go!</string>
     <string name="logo_description">Droid bot head sticking out of a shoe (Droid boot Logo)</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_button">Add a new Shoe</string>
     <string name="save_button">Save</string>
     <string name="cancel_button">Cancel</string>
@@ -24,4 +24,14 @@
     <string name="label_company">Company</string>
     <string name="label_size">Size</string>
     <string name="label_description">Description</string>
+    <string name="delete_button">Delete</string>
+    <string name="logout_button">Logout</string>
+    <string name="new_shoe">New Shoe</string>
+    <string name="instruction_title_1">1. Add your Shoes:</string>
+    <string name="instruction_1">Tap the + button to add new shoes to your list.</string>
+    <string name="instruction_title_2">2. Edit Existing Shoes</string>
+    <string name="instruction_2">Click on any shoe in the list to edit its details</string>
+    <string name="instruction_title_3">3. View Details</string>
+    <string name="instruction_3">Click on a shoe to see more information about it.</string>
+    <string name="your_shoes">Your Shoes</string>
 </resources>

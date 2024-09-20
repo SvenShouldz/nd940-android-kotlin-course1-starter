@@ -1,20 +1,21 @@
 package com.udacity.shoestore.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.CellShoeListItemBinding
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
@@ -35,7 +36,28 @@ class ShoeListFragment : Fragment() {
             R.layout.fragment_shoe_list, container, false
         )
 
+        val menuProvider = object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.clear() // Clear old menu items
+                menuInflater.inflate(R.menu.menu_shoe_list, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_logout -> {
+                        view?.findNavController()
+                            ?.navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
+
         (activity as AppCompatActivity).supportActionBar?.show()
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.your_shoes)
+        (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
 
         linearLayout = binding.shoeList
 
@@ -43,7 +65,7 @@ class ShoeListFragment : Fragment() {
 
         binding.addShoeButton.setOnClickListener { view ->
             view.findNavController()
-                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment())
+                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment(null))
         }
 
         return binding.root
@@ -53,7 +75,7 @@ class ShoeListFragment : Fragment() {
         shoeList.observe(viewLifecycleOwner) { list ->
 
             linearLayout.removeAllViews()
-            list?.let{
+            list?.let {
                 for (shoe in it) {
                     val itemBinding: CellShoeListItemBinding = DataBindingUtil.inflate(
                         layoutInflater,
@@ -64,10 +86,16 @@ class ShoeListFragment : Fragment() {
 
                     itemBinding.shoe = shoe
 
+                    itemBinding.root.setOnClickListener {
+                        // Navigate to the ShoeDetailFragment using Safe Args
+                        val action = ShoeListFragmentDirections
+                            .actionShoeListFragmentToShoeDetailFragment(shoe)
+                        findNavController().navigate(action)
+                    }
+
                     linearLayout.addView(itemBinding.root)
                 }
             }
-
         }
     }
 }

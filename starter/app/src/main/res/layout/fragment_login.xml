@@ -3,16 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
         <LinearLayout
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/logo_description"
+                android:layout_gravity="center"
+                android:src="@drawable/droidboot"
+                app:tint="@color/colorPrimaryLight" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="@dimen/default_padding"
+                android:paddingBottom="@dimen/padding_double"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/app_name_droid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.02"
+                    android:text="@string/app_name_droid"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/app_name_boot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.02"
+                    android:text="@string/app_name_boot"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="24sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/edit_mail"

@@ -8,10 +8,11 @@
     <string name="edit_password_hint">Password</string>
     <string name="welcome_button">Boot me up</string>
     <string name="welcome_sub_text">Step into the future</string>
-    <string name="welcome_text">Welcome to Droid Boot</string>
+    <string name="welcome_head_text">Welcome to Droid Boot</string>
+    <string name="welcome_text">Manage your shoe collection effortlessly: add new shoes, edit or delete existing ones, and include descriptions along with sizes. Keep your favorite footwear details organized and enjoy easy tracking!</string>
     <string name="instruction_title">How it works</string>
     <string name="instruction_sub_text">First, add your shoes to the list by using the + Button. Edit existing shoes by clicking on the item.</string>
-    <string name="instruction_button">Ok, Let\'s Go!</string>
+    <string name="instruction_button">OK, Let\'s Go!</string>
     <string name="logo_description">Droid bot head sticking out of a shoe (Droid boot Logo)</string>
     <string name="add_button">Add a new Shoe</string>
     <string name="save_button">Save</string>
@@ -31,9 +32,10 @@
     <string name="instruction_1">Tap the + button to add new shoes to your list.</string>
     <string name="instruction_title_2">2. Edit Existing Shoes</string>
     <string name="instruction_2">Click on any shoe in the list to edit its details</string>
-    <string name="instruction_title_3">3. View Details</string>
-    <string name="instruction_3">Click on a shoe to see more information about it.</string>
+    <string name="instruction_title_3">3. Delete Shoes</string>
+    <string name="instruction_3">Tap the delete icon in the toolbar on the detail screen to delete the shoe.</string>
     <string name="your_shoes">Your Shoes</string>
     <string name="empty_field">Please fill in all fields</string>
     <string name="invalid_size">Please enter a valid size</string>
-</resources>
+    <string name="call_to_action">Add a shoe to the list by hitting the + button</string>
+   </resources>

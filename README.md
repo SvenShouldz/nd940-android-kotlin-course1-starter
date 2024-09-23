@@ -1,52 +1,30 @@
-# README Template
+# Droid Boot
 
-Below is a template provided for use when building your README file for students.
+The Shoe List App is an Android application developed as a learning project for Udacity. This app showcases my understanding of key concepts in Android development, including data binding, navigation, and layout management. 
 
-# Project Title
+## Features
 
-Project description goes here.
+- **Add Shoes**: Easily add new shoes to your collection using the **+** button.
+- **Edit Shoes**: Click on any shoe in the list to edit its details.
+- **Delete Shoes**: Remove shoes from your list through the menu options.
+- **View Details**: Tap on a shoe to see more detailed information.
 
-## Getting Started
+## Technologies Used
 
-Instructions for how to get a copy of the project running on your local machine.
+- **Android**: Built using Android SDK.
+- **Data Binding**: Implemented data binding for efficient UI updates.
+- **Navigation Component**: Used the Navigation component for seamless navigation between fragments.
+- **Layouts**: Utilized various layout types (LinearLayout, ScrollView) for a responsive UI.
 
-### Dependencies
+## Installation
 
+Using Java 17, Gradle 7.5 
+
+1. Clone this repository: 
 ```
-Examples here
+git clone https://github.com/SvenShouldz/nd940-android-kotlin-course1-starter.git
 ```
 
-### Installation
+2. Open the project in Android Studio.
 
-Step by step explanation of how to get a dev environment running.
-
-List out the steps
-
-```
-Give an example here
-```
-
-## Testing
-
-Explain the steps needed to run any automated tests
-
-### Break Down Tests
-
-Explain what each test does and why
-
-```
-Examples here
-```
-## Project Instructions
-
-This section should contain all the student deliverables for this project.
-
-## Built With
-
-* [Item1](www.item1.com) - Description of item
-* [Item2](www.item2.com) - Description of item
-* [Item3](www.item3.com) - Description of item
-
-Include all items used to build project.
-
-## License
+3. Build and run the app on your Android device or emulator.

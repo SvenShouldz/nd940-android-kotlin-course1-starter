@@ -52,17 +52,17 @@ class ShoeDetailFragment : Fragment() {
             val sizeString = binding.editSize.text.toString()
             val description = binding.editDescription.text.toString()
 
-            // check if textEdits are empty
-            if (name.isEmpty() || company.isEmpty() || sizeString.isEmpty() || description.isEmpty()) {
+            val size: Double
+            try {
+                size = sizeString.toDouble()
+            } catch (e: NumberFormatException) {
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.empty_field),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
+                return@setOnClickListener
             }
-
-            val size: Double = sizeString.toDouble()
 
             // Check if size is greater than 60
             if (size >= 60) {
@@ -87,9 +87,20 @@ class ShoeDetailFragment : Fragment() {
                 description = description
             )
 
-            // add new Shoe and navigate back
-            viewModel.addOrUpdate(shoe)
-            view.findNavController().navigateUp()
+            // check if textEdits are empty
+            if (name.isEmpty() || company.isEmpty() || sizeString.isEmpty() || description.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.empty_field),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            } else {
+                // add new Shoe and navigate back
+                viewModel.addOrUpdate(shoe)
+                view.findNavController().navigateUp()
+            }
+
         }
 
         binding.cancelButton.setOnClickListener { view ->

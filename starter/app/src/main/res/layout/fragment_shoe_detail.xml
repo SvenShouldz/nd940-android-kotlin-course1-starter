@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:autofillHints=""
                 android:paddingStart="@dimen/padding_double"
                 android:paddingEnd="@dimen/padding_double"
                 android:background="@drawable/rounded_shape"
@@ -54,7 +53,6 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:paddingStart="@dimen/padding_double"
                 android:paddingEnd="@dimen/padding_double"
-                android:autofillHints=""
                 android:background="@drawable/rounded_shape"
                 android:ems="10"
                 android:hint="@string/detail_company"
@@ -76,13 +74,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:autofillHints=""
                 android:background="@drawable/rounded_shape"
                 android:paddingStart="@dimen/padding_double"
                 android:paddingEnd="@dimen/padding_double"
                 android:ems="10"
                 android:hint="@string/detail_size"
-                android:inputType="numberSigned"
+                android:inputType="numberDecimal"
                 android:padding="@dimen/default_padding" />
 
             <TextView
@@ -100,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginEnd="@dimen/default_margin"
-                android:autofillHints=""
                 android:background="@drawable/rounded_shape"
                 android:paddingStart="@dimen/padding_double"
                 android:paddingEnd="@dimen/padding_double"

@@ -26,6 +26,7 @@ class ShoeListFragment : Fragment() {
 
     private val viewModel: ShoeListViewModel by activityViewModels()
     private lateinit var linearLayout: LinearLayout
+    private lateinit var menuProvider: MenuProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +36,33 @@ class ShoeListFragment : Fragment() {
             inflater,
             R.layout.fragment_shoe_list, container, false
         )
+        linearLayout = binding.shoeList
 
-        // Set Logout Button
-        val menuProvider = object : MenuProvider {
+        // Set Actionbar
+        setupAppBarConfig()
+
+        // add shoes to linearLayout
+        setupShoeList(viewModel.shoeList)
+
+        // navigate to shoeDetailFragment to add new shoe (null)
+        binding.addShoeButton.setOnClickListener { view ->
+            view.findNavController()
+                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment(null))
+        }
+
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // remove old menuProvider
+        (activity as AppCompatActivity).removeMenuProvider(menuProvider)
+    }
+
+    private fun setupAppBarConfig() {
+        menuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menu.clear() // Clear old menu items
+                menu.clear()
                 menuInflater.inflate(R.menu.menu_shoe_list, menu)
             }
 
@@ -56,48 +79,35 @@ class ShoeListFragment : Fragment() {
             }
         }
 
-        // Set Actionbar
         (activity as AppCompatActivity).supportActionBar?.show()
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.your_shoes)
         (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
-
-        linearLayout = binding.shoeList
-
-        // add shoes to linearLayout
-        setupShoeList(viewModel.shoeList)
-
-        // navigate to shoeDetailFragment to add new shoe (null)
-        binding.addShoeButton.setOnClickListener { view ->
-            view.findNavController()
-                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment(null))
-        }
-
-        return binding.root
     }
 
     private fun setupShoeList(shoeList: LiveData<MutableList<Shoe>>) {
         shoeList.observe(viewLifecycleOwner) { list ->
+            if (list.isNotEmpty()) {
+                linearLayout.removeAllViews()
+                list?.let {
+                    for (shoe in it) {
+                        val itemBinding: CellShoeListItemBinding = DataBindingUtil.inflate(
+                            layoutInflater,
+                            R.layout.cell_shoe_list_item,
+                            linearLayout,
+                            false
+                        )
 
-            linearLayout.removeAllViews()
-            list?.let {
-                for (shoe in it) {
-                    val itemBinding: CellShoeListItemBinding = DataBindingUtil.inflate(
-                        layoutInflater,
-                        R.layout.cell_shoe_list_item,
-                        linearLayout,
-                        false
-                    )
+                        itemBinding.shoe = shoe
 
-                    itemBinding.shoe = shoe
+                        itemBinding.root.setOnClickListener {
+                            // Navigate to the ShoeDetailFragment using Safe Args
+                            val action = ShoeListFragmentDirections
+                                .actionShoeListFragmentToShoeDetailFragment(shoe)
+                            findNavController().navigate(action)
+                        }
 
-                    itemBinding.root.setOnClickListener {
-                        // Navigate to the ShoeDetailFragment using Safe Args
-                        val action = ShoeListFragmentDirections
-                            .actionShoeListFragmentToShoeDetailFragment(shoe)
-                        findNavController().navigate(action)
+                        linearLayout.addView(itemBinding.root)
                     }
-
-                    linearLayout.addView(itemBinding.root)
                 }
             }
         }

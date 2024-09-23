@@ -23,7 +23,8 @@ import com.udacity.shoestore.models.ShoeListViewModel
 class ShoeDetailFragment : Fragment() {
 
     private lateinit var viewModel: ShoeListViewModel
-    private lateinit var shoe: Shoe
+    private var shoe: Shoe? = null
+    private lateinit var menuProvider: MenuProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,6 @@ class ShoeDetailFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[ShoeListViewModel::class.java]
 
         // save Shoe to ViewModel
-        // TODO error while saving edited shoe
         binding.saveButton.setOnClickListener { view ->
             val name = binding.editName.text.toString()
             val company = binding.editCompany.text.toString()
@@ -54,21 +54,33 @@ class ShoeDetailFragment : Fragment() {
 
             // check if textEdits are empty
             if (name.isEmpty() || company.isEmpty() || sizeString.isEmpty() || description.isEmpty()) {
-                Toast.makeText(requireContext(), getString(R.string.empty_field), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.empty_field),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
 
-            // check if size is bigger than 60
-            val size: Double = if (sizeString.toInt() >= 60) {
-                Toast.makeText(requireContext(), getString(R.string.invalid_size), Toast.LENGTH_SHORT)
-                    .show()
+            val size: Double = sizeString.toDouble()
+
+            // Check if size is greater than 60
+            if (size >= 60) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.invalid_size),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
-            } else {
-                sizeString.toDouble()
             }
 
             // create new Shoe Object
-            val newShoe = Shoe(
+            val shoe = args.shoe?.copy( // args.shoe is passed from the navigation
+                name = name,
+                company = company,
+                size = size,
+                description = description
+            ) ?: Shoe(  // If it's a new shoe
                 name = name,
                 company = company,
                 size = size,
@@ -76,7 +88,7 @@ class ShoeDetailFragment : Fragment() {
             )
 
             // add new Shoe and navigate back
-            viewModel.add(newShoe)
+            viewModel.addOrUpdate(shoe)
             view.findNavController().navigateUp()
         }
 
@@ -88,19 +100,25 @@ class ShoeDetailFragment : Fragment() {
         return binding.root
     }
 
-    //TODO delete Button is not shown yet
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as AppCompatActivity).removeMenuProvider(menuProvider)
+    }
+
     private fun setupAppBarConfig(savedShoe: Shoe?) {
+
         // init new menuProvider
-        val menuProvider = object : MenuProvider {
+        menuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menu.clear() // Clear old menu items
-                menuInflater.inflate(R.menu.menu_shoe_list, menu)
+                menuInflater.inflate(R.menu.menu_shoe_detail, menu)
             }
+
             // delete shoe and navigate back
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.action_delete_shoe -> {
-                        viewModel.remove(shoe)
+                        shoe?.let { viewModel.remove(it) }
                         view?.findNavController()
                             ?.navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
                         true
@@ -130,12 +148,12 @@ class ShoeDetailFragment : Fragment() {
         args: ShoeDetailFragmentArgs,
         binding: FragmentShoeDetailBinding
     ) {
-        val shoe = args.shoe
+        shoe = args.shoe
         shoe?.let {
-            binding.editName.setText(shoe.name)
-            binding.editCompany.setText(shoe.company)
-            binding.editSize.setText(shoe.size.toString())
-            binding.editDescription.setText(shoe.description)
+            it.name.let { name -> binding.editName.setText(name) }
+            it.company.let { company -> binding.editCompany.setText(company) }
+            it.size.let { size -> binding.editSize.setText(size.toString()) }
+            it.description.let { description -> binding.editDescription.setText(description) }
         }
     }
 

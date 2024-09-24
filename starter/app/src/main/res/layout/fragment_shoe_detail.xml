@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,6 +39,7 @@
                 android:paddingEnd="@dimen/padding_double"
                 android:background="@drawable/rounded_shape"
                 android:ems="10"
+                android:text="@={shoe.name}"
                 android:hint="@string/detail_name"
                 android:inputType="text"
                 android:padding="@dimen/default_padding" />
@@ -56,6 +63,7 @@
                 android:paddingEnd="@dimen/padding_double"
                 android:background="@drawable/rounded_shape"
                 android:ems="10"
+                android:text="@={shoe.company}"
                 android:hint="@string/detail_company"
                 android:inputType="text"
                 android:padding="@dimen/default_padding" />
@@ -79,6 +87,7 @@
                 android:paddingStart="@dimen/padding_double"
                 android:paddingEnd="@dimen/padding_double"
                 android:ems="10"
+                android:text="@={shoe.sizeString}"
                 android:hint="@string/detail_size"
                 android:inputType="numberDecimal"
                 android:padding="@dimen/default_padding" />
@@ -107,6 +116,7 @@
                 android:maxLines="6"
                 android:singleLine="false"
                 android:ems="10"
+                android:text="@={shoe.description}"
                 android:hint="@string/detail_description"
                 android:inputType="textMultiLine"
                 android:padding="@dimen/default_padding" />

@@ -44,10 +44,10 @@ class ShoeListFragment : Fragment() {
         // add shoes to linearLayout
         setupShoeList(viewModel.shoeList)
 
-        // navigate to shoeDetailFragment to add new shoe (null)
+        // navigate to shoeDetailFragment to add new shoe
         binding.addShoeButton.setOnClickListener { view ->
             view.findNavController()
-                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment(null))
+                .navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoeDetailFragment(Shoe()))
         }
 
         return binding.root

@@ -35,70 +35,46 @@ class ShoeDetailFragment : Fragment() {
             R.layout.fragment_shoe_detail, container, false
         )
 
-        // get Safe Args & add to bindings
+        // get Safe Args
         val args: ShoeDetailFragmentArgs by navArgs()
-        setupNavArguments(args, binding)
 
         // set ActionBar Title & Icon
         val savedShoe: Shoe? = args.shoe
         setupAppBarConfig(savedShoe)
 
+        //apply savedShoe or newShoe to binding
+        shoe = savedShoe ?: Shoe()
+        binding.shoe = shoe
+
         viewModel = ViewModelProvider(requireActivity())[ShoeListViewModel::class.java]
 
         // save Shoe to ViewModel
         binding.saveButton.setOnClickListener { view ->
-            val name = binding.editName.text.toString()
-            val company = binding.editCompany.text.toString()
-            val sizeString = binding.editSize.text.toString()
-            val description = binding.editDescription.text.toString()
+            shoe?.let {
+                // Check if any fields are empty
+                if (it.name.isEmpty() || it.company.isEmpty() || it.size <= 0.0 || it.description.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.empty_field),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
 
-            val size: Double
-            try {
-                size = sizeString.toDouble()
-            } catch (e: NumberFormatException) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.empty_field),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
+                // Check if the size is greater than or equal to 60
+                if (it.size >= 60) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.invalid_size),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
 
-            // Check if size is greater than 60
-            if (size >= 60) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.invalid_size),
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-
-            // create new Shoe Object
-            val shoe = args.shoe?.copy( // args.shoe is passed from the navigation
-                name = name,
-                company = company,
-                size = size,
-                description = description
-            ) ?: Shoe(  // If it's a new shoe
-                name = name,
-                company = company,
-                size = size,
-                description = description
-            )
-
-            // check if textEdits are empty
-            if (name.isEmpty() || company.isEmpty() || sizeString.isEmpty() || description.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.empty_field),
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            } else {
                 // add new Shoe and navigate back
-                viewModel.addOrUpdate(shoe)
+                viewModel.addOrUpdate(it)
                 view.findNavController().navigateUp()
+
             }
 
         }
@@ -153,19 +129,4 @@ class ShoeDetailFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.new_shoe)
         }
     }
-
-    // add navArgs to binding
-    private fun setupNavArguments(
-        args: ShoeDetailFragmentArgs,
-        binding: FragmentShoeDetailBinding
-    ) {
-        shoe = args.shoe
-        shoe?.let {
-            it.name.let { name -> binding.editName.setText(name) }
-            it.company.let { company -> binding.editCompany.setText(company) }
-            it.size.let { size -> binding.editSize.setText(size.toString()) }
-            it.description.let { description -> binding.editDescription.setText(description) }
-        }
-    }
-
 }

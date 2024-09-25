@@ -3,6 +3,7 @@ package com.udacity.shoestore.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -24,15 +25,17 @@ class LoginFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.hide()
 
-        binding.loginButton.setOnClickListener { view ->
-            view.findNavController()
-                .navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
+        val onClick = OnClickListener { view ->
+            openWelcomeFragment(view)
         }
-        binding.signupButton.setOnClickListener { view ->
-            view.findNavController()
-                .navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
-        }
+        binding.loginButton.setOnClickListener(onClick)
+        binding.signupButton.setOnClickListener(onClick)
 
         return binding.root
+    }
+
+    private fun openWelcomeFragment(view: View) {
+        view.findNavController()
+            .navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
     }
 }

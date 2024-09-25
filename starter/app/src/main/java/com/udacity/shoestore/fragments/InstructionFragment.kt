@@ -22,9 +22,10 @@ class InstructionFragment : Fragment() {
             R.layout.fragment_instruction, container, false
         )
 
-        (activity as AppCompatActivity).supportActionBar?.show()
-        (activity as AppCompatActivity).supportActionBar?.title =
-            getString(R.string.instruction_title)
+        (activity as AppCompatActivity).supportActionBar?.apply {
+            show()
+            title = getString(R.string.instruction_title)
+        }
 
         binding.instructionButton.setOnClickListener { view ->
             view.findNavController()

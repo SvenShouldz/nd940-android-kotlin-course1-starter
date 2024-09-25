@@ -50,7 +50,7 @@ class ShoeDetailFragment : Fragment() {
         binding.saveButton.setOnClickListener { view ->
             shoe.let {
                 // Check if any fields are empty
-                if (it.name.isEmpty() || it.company.isEmpty() || it.size <= 0.0 || it.description.isEmpty()) {
+                if (shoe.isEmpty()) {
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.empty_field),
@@ -72,9 +72,7 @@ class ShoeDetailFragment : Fragment() {
                 // add new Shoe and navigate back
                 viewModel.addOrUpdate(it)
                 view.findNavController().navigateUp()
-
             }
-
         }
 
         binding.cancelButton.setOnClickListener { view ->
@@ -91,7 +89,6 @@ class ShoeDetailFragment : Fragment() {
     }
 
     private fun setupAppBarConfig(savedShoe: Shoe) {
-
         // init new menuProvider
         menuProvider = object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -113,15 +110,15 @@ class ShoeDetailFragment : Fragment() {
                 }
             }
         }
-
-        (activity as AppCompatActivity).supportActionBar?.show()
         // change title when open existing shoeDetail
-        if (shoe.isFresh) {
-            (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.new_shoe)
-        } else {
-            (activity as AppCompatActivity).supportActionBar?.title =
-                "${shoe.company} - ${shoe.name}"
-            (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
+        (activity as AppCompatActivity).apply {
+            supportActionBar?.show()
+            if (shoe.isFresh()) {
+                supportActionBar?.title = getString(R.string.new_shoe)
+            } else {
+                supportActionBar?.title = "${shoe.company} - ${shoe.name}"
+                addMenuProvider(menuProvider, viewLifecycleOwner)
+            }
         }
     }
 }

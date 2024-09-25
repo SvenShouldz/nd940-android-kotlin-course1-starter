@@ -22,9 +22,10 @@ class WelcomeFragment : Fragment() {
             R.layout.fragment_welcome, container, false
         )
 
-        (activity as AppCompatActivity).supportActionBar?.hide()
-        (activity as AppCompatActivity).supportActionBar?.title =
-            getString(R.string.instruction_title)
+        (activity as AppCompatActivity).supportActionBar?.apply {
+            hide()
+            title = getString(R.string.instruction_title)
+        }
 
         binding.welcomeButton.setOnClickListener { view ->
             view.findNavController()

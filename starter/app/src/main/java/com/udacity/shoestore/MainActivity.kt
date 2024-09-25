@@ -11,17 +11,13 @@ import com.udacity.shoestore.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = findNavController(R.id.navHostFragment)
-        appBarConfiguration = AppBarConfiguration(
+        val navController = findNavController(R.id.navHostFragment)
+        val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.loginFragment,
                 R.id.welcomeFragment,

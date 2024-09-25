@@ -79,9 +79,11 @@ class ShoeListFragment : Fragment() {
             }
         }
 
-        (activity as AppCompatActivity).supportActionBar?.show()
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.your_shoes)
-        (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
+        (activity as AppCompatActivity).apply {
+            supportActionBar?.show()
+            supportActionBar?.title = getString(R.string.your_shoes)
+            addMenuProvider(menuProvider, viewLifecycleOwner)
+        }
     }
 
     private fun setupShoeList(shoeList: LiveData<MutableList<Shoe>>) {

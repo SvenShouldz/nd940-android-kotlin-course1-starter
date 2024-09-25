@@ -12,4 +12,8 @@ data class Shoe(val id: UUID = UUID.randomUUID(), var name: String = "", var siz
         set(value) {
             size = value.toDoubleOrNull() ?: 0.0
         }
+
+    // Property to check if the shoe object is "fresh" or empty
+    val isFresh: Boolean
+        get() = name.isEmpty() && size == 0.0 && company.isEmpty() && description.isEmpty()
 }

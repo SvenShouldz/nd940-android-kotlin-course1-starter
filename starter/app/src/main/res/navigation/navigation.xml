@@ -26,7 +26,7 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@+id/instructionFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -66,8 +66,7 @@
         android:label="ShoeDetailFragment" >
         <argument
             android:name="shoe"
-            app:argType="com.udacity.shoestore.models.Shoe"
-            app:nullable="true"/>
+            app:argType="com.udacity.shoestore.models.Shoe" />
         <action
             android:id="@+id/action_shoeDetailFragment_to_shoeListFragment"
             app:destination="@id/shoeListFragment"

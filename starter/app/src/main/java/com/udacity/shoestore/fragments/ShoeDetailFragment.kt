@@ -23,7 +23,7 @@ import com.udacity.shoestore.models.ShoeListViewModel
 class ShoeDetailFragment : Fragment() {
 
     private lateinit var viewModel: ShoeListViewModel
-    private var shoe: Shoe? = null
+    private var shoe: Shoe = Shoe()
     private lateinit var menuProvider: MenuProvider
 
     override fun onCreateView(
@@ -37,20 +37,18 @@ class ShoeDetailFragment : Fragment() {
 
         // get Safe Args
         val args: ShoeDetailFragmentArgs by navArgs()
+        val savedShoe: Shoe = args.shoe
 
-        // set ActionBar Title & Icon
-        val savedShoe: Shoe? = args.shoe
-        setupAppBarConfig(savedShoe)
-
-        //apply savedShoe or newShoe to binding
-        shoe = savedShoe ?: Shoe()
+        //apply savedShoe to binding
+        shoe = savedShoe
+        setupAppBarConfig(shoe)
         binding.shoe = shoe
 
         viewModel = ViewModelProvider(requireActivity())[ShoeListViewModel::class.java]
 
         // save Shoe to ViewModel
         binding.saveButton.setOnClickListener { view ->
-            shoe?.let {
+            shoe.let {
                 // Check if any fields are empty
                 if (it.name.isEmpty() || it.company.isEmpty() || it.size <= 0.0 || it.description.isEmpty()) {
                     Toast.makeText(
@@ -92,7 +90,7 @@ class ShoeDetailFragment : Fragment() {
         (activity as AppCompatActivity).removeMenuProvider(menuProvider)
     }
 
-    private fun setupAppBarConfig(savedShoe: Shoe?) {
+    private fun setupAppBarConfig(savedShoe: Shoe) {
 
         // init new menuProvider
         menuProvider = object : MenuProvider {
@@ -105,7 +103,7 @@ class ShoeDetailFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.action_delete_shoe -> {
-                        shoe?.let { viewModel.remove(it) }
+                        shoe.let { viewModel.remove(it) }
                         view?.findNavController()
                             ?.navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
                         true
@@ -117,16 +115,13 @@ class ShoeDetailFragment : Fragment() {
         }
 
         (activity as AppCompatActivity).supportActionBar?.show()
-
         // change title when open existing shoeDetail
-        if (savedShoe != null) {
-            (activity as AppCompatActivity).supportActionBar?.title =
-                "${savedShoe.company} - ${savedShoe.name}"
-            (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
-
-            shoe = savedShoe
-        } else {
+        if (shoe.isFresh) {
             (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.new_shoe)
+        } else {
+            (activity as AppCompatActivity).supportActionBar?.title =
+                "${shoe.company} - ${shoe.name}"
+            (activity as AppCompatActivity).addMenuProvider(menuProvider, viewLifecycleOwner)
         }
     }
 }

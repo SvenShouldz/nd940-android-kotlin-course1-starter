@@ -1,25 +1,35 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="shoe"
             type="com.udacity.shoestore.models.Shoe" />
     </data>
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shoe_list_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_shape"
         android:layout_margin="@dimen/default_padding"
         android:padding="@dimen/padding_double">
 
+        <!-- Shoe name and company container -->
         <LinearLayout
+            android:id="@+id/shoe_info_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/default_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/shoe_size"
+            app:layout_constraintHorizontal_bias="0"
+            android:gravity="start">
 
+            <!-- Shoe Name -->
             <TextView
                 android:id="@+id/shoe_name"
                 android:layout_width="wrap_content"
@@ -28,6 +38,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Shoe Company -->
             <TextView
                 android:id="@+id/shoe_company"
                 android:layout_width="wrap_content"
@@ -37,17 +48,20 @@
 
         </LinearLayout>
 
+        <!-- Shoe Size -->
         <TextView
             android:id="@+id/shoe_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text='@{"Size: " + shoe.size}'
-            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
             android:textAlignment="textEnd"
-            android:textSize="16sp" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shoe_info_container"
+             />
 
-    </LinearLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
